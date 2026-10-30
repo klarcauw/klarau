@@ -107,3 +107,12 @@ def read_registrations(
         )
 
     return crud.get_registrations(db, event_id)
+    
+    from fastapi import Request
+from fastapi.templating import Jinja2Templates
+
+templates = Jinja2Templates(directory="templates")
+
+@app.get("/", include_in_schema=False)
+def read_root(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
